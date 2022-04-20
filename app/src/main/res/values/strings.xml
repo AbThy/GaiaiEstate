@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Gaia Estate</string>
+    <string name="username_en">Username</string>
+    <string name="password_en">Password</string>
+    <string name="logIn_en">Log in</string>
+    <string name="anonymous_login">Anonymous login</string>
+    <string name="register_en">Register</string>
+    <string name="googleLogIn_en">LOG IN WITH GOOGLE</string>
+    <string name="eMail">e-mail</string>
+    <string name="passwordAgain_en">Password again</string>
+    <string name="cancel">Cancel</string>
 </resources>

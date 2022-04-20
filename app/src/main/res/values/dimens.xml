@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="titleTextSize">20sp</dimen>
+    <dimen name="registration_InputField">240sp</dimen>
+    <dimen name="titleLeftMargin">24sp</dimen>
+</resources>

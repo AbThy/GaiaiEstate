@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "882208542665",
+    "project_id": "gaiaestate",
+    "storage_bucket": "gaiaestate.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:882208542665:android:c5ef9fa4a4094e7d4b2218",
+        "android_client_info": {
+          "package_name": "h052104.gaiaestate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "882208542665-0o094d6pearopaq609obmkimvcr174ch.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "h052104.gaiaestate",
+            "certificate_hash": "67c50110e1bf65458b74e1e9e17ac4c2526360e7"
+          }
+        },
+        {
+          "client_id": "882208542665-85b5r3451093gdq64kap4fc0rjtmjdh3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4BU85ou1TZZl09KYjfVW0UBtQNZBbyqI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "882208542665-85b5r3451093gdq64kap4fc0rjtmjdh3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

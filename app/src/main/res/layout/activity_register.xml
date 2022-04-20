@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center|clip_vertical"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <TextView
+            android:id="@+id/textViewUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-smallcaps"
+            android:text="@string/username_en"
+            android:textAlignment="textStart"
+            android:textSize="@dimen/titleTextSize"
+            android:translationX="@dimen/titleLeftMargin" />
+
+        <EditText
+            android:id="@+id/editTextUserName"
+            android:layout_width="@dimen/registration_InputField"
+            android:layout_height="wrap_content"
+            android:hint="@string/username_en"
+            android:inputType="text"
+            android:textAlignment="viewStart" />
+
+        <TextView
+            android:id="@+id/textViewEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-smallcaps"
+            android:text="TextView"
+            android:textSize="@dimen/titleTextSize"
+            android:translationX="@dimen/titleLeftMargin" />
+
+        <EditText
+            android:id="@+id/editTextTextPersonName2"
+            android:layout_width="@dimen/registration_InputField"
+            android:layout_height="wrap_content"
+            android:hint="@string/eMail"
+            android:inputType="textEmailAddress" />
+
+        <TextView
+            android:id="@+id/textViewPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-smallcaps"
+            android:text="@string/password_en"
+            android:textSize="@dimen/titleTextSize"
+            android:translationX="@dimen/titleLeftMargin" />
+
+        <EditText
+            android:id="@+id/editTextPassword"
+            android:layout_width="@dimen/registration_InputField"
+            android:layout_height="wrap_content"
+            android:hint="@string/password_en"
+            android:inputType="textPassword" />
+
+        <TextView
+            android:id="@+id/textViewPasswordAgain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-smallcaps"
+            android:text="@string/passwordAgain_en"
+            android:textSize="@dimen/titleTextSize"
+            android:translationX="@dimen/titleLeftMargin" />
+
+        <EditText
+            android:id="@+id/editTextPasswordAgain"
+            android:layout_width="@dimen/registration_InputField"
+            android:layout_height="wrap_content"
+            android:hint="@string/password_en"
+            android:inputType="textPassword" />
+
+        <Button
+            android:id="@+id/buttonRegister"
+            android:layout_width="180sp"
+            android:layout_height="wrap_content"
+            android:text="@string/register_en"
+            android:translationY="40sp"
+            android:visibility="visible"
+            android:onClick="register"
+            />
+
+        <TextView
+            android:id="@+id/textViewCancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:translationY="60sp"
+            android:onClick="cancel"
+            />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
