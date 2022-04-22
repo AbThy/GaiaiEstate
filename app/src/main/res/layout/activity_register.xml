@@ -37,12 +37,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-smallcaps"
-            android:text="TextView"
+            android:text="E-MAIL"
             android:textSize="@dimen/titleTextSize"
             android:translationX="@dimen/titleLeftMargin" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName2"
+            android:id="@+id/editTextEmail"
             android:layout_width="@dimen/registration_InputField"
             android:layout_height="wrap_content"
             android:hint="@string/eMail"
@@ -79,6 +79,12 @@
             android:layout_height="wrap_content"
             android:hint="@string/password_en"
             android:inputType="textPassword" />
+
+        <CheckBox
+            android:id="@+id/termsCheckBox"
+            android:layout_width="200sp"
+            android:layout_height="80sp"
+            android:text="@string/termsOfUseCheckboxText" />
 
         <Button
             android:id="@+id/buttonRegister"

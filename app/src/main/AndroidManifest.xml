@@ -10,6 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GaiaEstate">
         <activity
+            android:name=".BrowserActivity"
+            android:exported="false"
+            android:label="@string/title_activity_browser"
+            android:theme="@style/Theme.GaiaEstate.NoActionBar" />
+        <activity
             android:name=".RegisterActivity"
             android:exported="false" />
         <activity
