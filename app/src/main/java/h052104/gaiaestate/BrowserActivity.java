@@ -5,6 +5,8 @@ import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,7 +20,9 @@ import h052104.gaiaestate.databinding.ActivityBrowserBinding;
 
 public class BrowserActivity extends AppCompatActivity {
 
+    private FirebaseUser user;
     private ActivityBrowserBinding binding;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,5 +45,8 @@ public class BrowserActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        // Get user
+        user = FirebaseAuth.getInstance().getCurrentUser();
     }
 }

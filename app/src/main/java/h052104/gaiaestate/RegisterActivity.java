@@ -30,7 +30,8 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void cancel(View view) {
-
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
     }
 
     public void register(View view) {
@@ -60,7 +61,7 @@ public class RegisterActivity extends AppCompatActivity {
                     startApp();
                 } else {
                     Log.d(LOG_TAG, "Error: firebaseAuth.createUserWithEmailAndPassword");
-                    Toast.makeText(RegisterActivity.this, "!! Firebase task: createUserWithEmailAndPassword failed: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegisterActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
         });
