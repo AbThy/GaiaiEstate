@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,20 +19,26 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private FirebaseAuth firebaseAuth;
     private static final String LOG_TAG = RegisterActivity.class.getName();
+    private static final String PREF_KEY = RegisterActivity.class.getPackage().toString();
+    private FirebaseAuth firebaseAuth;
+    private SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        int secretKey = getIntent().getIntExtra("SECRET_KEY", 0);
+        if(secretKey != 4254)
+            finish();
+
         firebaseAuth = FirebaseAuth.getInstance();
+        preferences = getSharedPreferences(PREF_KEY, MODE_PRIVATE);
     }
 
     public void cancel(View view) {
-        Intent i = new Intent(this, MainActivity.class);
-        startActivity(i);
+        finish();
     }
 
     public void register(View view) {
@@ -70,6 +77,30 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void startApp(){
         Intent i = new Intent(this, BrowserActivity.class);
+        i.putExtra("SECRET_KEY", 4254);
         startActivity(i);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("email", ((EditText)findViewById(R.id.editTextEmail)).getText().toString().trim());
+        editor.putString("userName", ((EditText)findViewById(R.id.editTextUserName)).getText().toString().trim());
+        editor.apply();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String emailDefault = preferences.getString("email","");
+        String userNameDefault = preferences.getString("userName","");
+        if(!emailDefault.equals("") || !userNameDefault.equals("")) {
+            Toast.makeText(RegisterActivity.this, "We restored some data from your last session!", Toast.LENGTH_SHORT).show();
+        }
+        if(!emailDefault.equals("")) {
+            ((EditText) findViewById(R.id.editTextEmail)).setText(emailDefault);
+            ((EditText) findViewById(R.id.editTextUserName)).setText(userNameDefault);
+        }
     }
 }

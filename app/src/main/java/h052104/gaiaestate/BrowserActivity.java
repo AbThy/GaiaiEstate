@@ -28,6 +28,10 @@ public class BrowserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        int secretKey = getIntent().getIntExtra("SECRET_KEY", 0);
+        if(secretKey != 4254)
+            finish();
+
         binding = ActivityBrowserBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
