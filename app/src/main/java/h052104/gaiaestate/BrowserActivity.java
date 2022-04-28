@@ -27,11 +27,10 @@ public class BrowserActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        // Secret key - app safety
         int secretKey = getIntent().getIntExtra("SECRET_KEY", 0);
         if(secretKey != 4254)
             finish();
-
         binding = ActivityBrowserBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -50,7 +49,7 @@ public class BrowserActivity extends AppCompatActivity {
             }
         });
 
-        // Get user
+        // AUTHENTICATION - Get user
         user = FirebaseAuth.getInstance().getCurrentUser();
     }
 }
