@@ -50,7 +50,7 @@ public class BrowserActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                Toast.makeText(BrowserActivity.this, "Selected property!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(BrowserActivity.this, "Selected property " + position, Toast.LENGTH_SHORT).show();
             }
 
             @Override

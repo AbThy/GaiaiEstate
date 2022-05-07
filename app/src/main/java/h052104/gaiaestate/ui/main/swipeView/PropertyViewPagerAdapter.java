@@ -48,14 +48,20 @@ public class PropertyViewPagerAdapter extends PagerAdapter {
 
         Property prop = properties.get(position);
 
-        int image = (R.drawable.property0);
+        int image = R.drawable.property0;
         imageView.setImageResource(image);
         title.setText(prop.getTitle());
         location.setText(prop.getLocation());
         String priceString = "" + prop.getPriceInMillion();
         price.setText(priceString);
 
-        container.addView(view, position);
+        container.addView(view, 0);
+        // Previously indexnek a position-t használtam
+        // Sajnos nem értem miért 0 az index, itt nem találtam több infót
+        // https://developer.android.com/reference/androidx/viewpager/widget/PagerAdapter#instantiateItem(android.view.ViewGroup,int)
+        // de aimango azt mondta így jó lesz és jó lett
+        // ¯\_(ツ)_/¯
+        // https://stackoverflow.com/questions/9402970/android-viewpager-throwing-indexoutofbounds-exception-when-setting-current-item
 
         return view;
     }
