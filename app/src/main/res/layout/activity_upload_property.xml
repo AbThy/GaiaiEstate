@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UploadActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="600sp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center|clip_vertical">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-smallcaps"
+            android:textSize="@dimen/titleTextSize"
+            android:text="Name of property" />
+
+        <EditText
+            android:id="@+id/editTextPropertyTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="Beautiful house" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-smallcaps"
+            android:textSize="@dimen/titleTextSize"
+            android:text="Location" />
+
+        <EditText
+            android:id="@+id/editTextLocation"
+            android:layout_width="200sp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="Salgótarján" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-smallcaps"
+            android:textSize="@dimen/titleTextSize"
+            android:text="Price (million HUF)" />
+
+        <EditText
+            android:id="@+id/editTextPrice"
+            android:layout_width="200sp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="42.54"
+            />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-smallcaps"
+            android:textSize="@dimen/titleTextSize"
+            android:text="Area (square meters)" />
+
+        <EditText
+            android:id="@+id/editTextSquareMeterArea"
+            android:layout_width="200sp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="1200"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200sp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginTop="10sp"
+            >
+
+
+            <Button
+                android:id="@+id/button2"
+                android:onClick="getImage"
+                android:layout_width="70sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4"
+                android:text="Select image"
+                android:textSize="10sp" />
+
+            <ImageView
+                android:id="@+id/uploadImagePreview"
+                android:layout_width="100sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/gaia_estate_logo" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="150sp"
+            android:layout_height="wrap_content"
+            android:text="Upload"
+            android:onClick="upload"
+            android:layout_marginTop="20sp"
+            />
+
+        <TextView
+            android:id="@+id/textViewCancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:translationY="10sp"
+            android:onClick="cancel"
+            />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

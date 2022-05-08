@@ -1,6 +1,8 @@
 package h052104.gaiaestate.ui.main.swipeView;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
+import org.w3c.dom.Text;
+
+import java.io.File;
 import java.util.ArrayList;
 
 import h052104.gaiaestate.R;
@@ -45,15 +50,17 @@ public class PropertyViewPagerAdapter extends PagerAdapter {
         TextView title = view.findViewById(R.id.propertyNameText);
         TextView location = view.findViewById(R.id.propertyPlaceText);
         TextView price = view.findViewById(R.id.propertyPriceText);
+        TextView area = view.findViewById(R.id.propertyAreaText);
 
         Property prop = properties.get(position);
 
-        int image = R.drawable.property0;
-        imageView.setImageResource(image);
+        Bitmap image = prop.getImage();
+        imageView.setImageBitmap(image);
         title.setText(prop.getTitle());
         location.setText(prop.getLocation());
-        String priceString = "" + prop.getPriceInMillion();
+        String priceString = prop.getPriceInMillion() + " M. Ft";
         price.setText(priceString);
+        area.setText(prop.getArea() + "m²");
 
         container.addView(view, 0);
         // Previously indexnek a position-t használtam

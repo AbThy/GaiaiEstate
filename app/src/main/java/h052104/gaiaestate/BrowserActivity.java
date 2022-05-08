@@ -1,21 +1,32 @@
 package h052104.gaiaestate;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
-import androidx.viewpager2.widget.ViewPager2;
 
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 
 import h052104.gaiaestate.model.Property;
+import h052104.gaiaestate.ui.main.swipeView.Transformator;
 import h052104.gaiaestate.ui.main.swipeView.PropertyViewPagerAdapter;
 
 
@@ -26,10 +37,15 @@ public class BrowserActivity extends AppCompatActivity {
     private PropertyViewPagerAdapter adapter;
     private ArrayList<Property> properties;
 
+    private FirebaseFirestore firestore;
+    private CollectionReference firestoreItems;
+    private StorageReference storageReference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_browser);
+        properties = new ArrayList<>();
         // Secret key - app safety
         int secretKey = getIntent().getIntExtra("SECRET_KEY", 0);
         if(secretKey != 4254)
@@ -38,9 +54,13 @@ public class BrowserActivity extends AppCompatActivity {
         // Authentication - Get user
         user = FirebaseAuth.getInstance().getCurrentUser();
 
-        // Slider
+        // Firestore
+        firestore = FirebaseFirestore.getInstance();
+        firestoreItems = firestore.collection("property");
+
+        // Slider & data
         viewPager = findViewById(R.id.pager);
-        loadProperties();
+        queryData();
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -50,7 +70,7 @@ public class BrowserActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                Toast.makeText(BrowserActivity.this, "Selected property " + position, Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
@@ -60,7 +80,39 @@ public class BrowserActivity extends AppCompatActivity {
         });
     }
 
+    private void queryData() {
+        adapter = new PropertyViewPagerAdapter(this, properties);
+        viewPager.setAdapter(adapter);
+        viewPager.setPageTransformer(true, new Transformator());
+        viewPager.setPadding(100,0,0,100);
+
+        properties.clear();
+
+        firestoreItems.orderBy("uploadDate").limit(10).get().addOnSuccessListener(queryDocumentSnapshots -> {
+                for(QueryDocumentSnapshot document : queryDocumentSnapshots){
+                    Property p = document.toObject(Property.class);
+                    storageReference = FirebaseStorage.getInstance().getReference("propertyImages/" + p.getImageKey());
+                    try {
+                        File local = File.createTempFile("tempFile", ".jpg");
+                        storageReference.getFile(local).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                Bitmap bitmap = BitmapFactory.decodeFile(local.getAbsolutePath());
+                                p.setImage(bitmap);
+                                properties.add(p);
+                                adapter.notifyDataSetChanged();
+                            }
+                        });
+
+                    } catch(Exception ex) {
+                        // TODO
+                    }
+                }
+        });
+    }
+
     private void loadProperties() {
+
         properties = new ArrayList<>();
         for (int i = 0; i < 10; i++){
             Property p = new Property();
@@ -72,7 +124,19 @@ public class BrowserActivity extends AppCompatActivity {
 
         adapter = new PropertyViewPagerAdapter(this, properties);
         viewPager.setAdapter(adapter);
+        viewPager.setPageTransformer(true, new Transformator());
         viewPager.setPadding(100,0,0,100);
     }
 
+    public void openProfile(View view){
+        Intent i = new Intent(this, ProfileActivity.class);
+        i.putExtra("SECRET_KEY", 4254);
+        startActivity(i);
+    }
+
+    public void openUpload(View view){
+        Intent i = new Intent(this, UploadActivity.class);
+        i.putExtra("SECRET_KEY", 4254);
+        startActivity(i);
+    }
 }

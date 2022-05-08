@@ -5,53 +5,82 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/propertyImageView"
-        android:layout_width="400sp"
-        android:layout_height="300sp"
-        android:layout_marginBottom="64dp"
-        android:scaleType="centerInside"
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="openProperty"
+        app:cardCornerRadius="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/property0" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/propertyNameText"
-        android:layout_width="201dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="42dp"
-        android:layout_marginTop="8dp"
-        android:text="TextView"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/propertyImageView" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp">
 
-    <TextView
-        android:id="@+id/propertyPlaceText"
-        android:layout_width="115dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="42dp"
-        android:text="TextView"
-        android:textAlignment="textEnd"
-        android:textColor="@color/teal_700"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/propertyImageView" />
+            <TextView
+                android:id="@+id/propertyNameText"
+                android:layout_width="250sp"
+                android:layout_height="33dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="4dp"
+                android:text="TextView"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/propertyImageView" />
 
-    <TextView
-        android:id="@+id/propertyPriceText"
-        android:layout_width="115dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="42dp"
-        android:text="TextView"
-        android:textAlignment="textEnd"
-        android:textColor="@color/design_default_color_secondary"
-        android:textSize="10sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/propertyImageView" />
+            <TextView
+                android:id="@+id/propertyPriceText"
+                android:layout_width="115dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="16dp"
+                android:text="TextView"
+                android:textAlignment="textEnd"
+                android:textColor="@color/design_default_color_secondary"
+                android:textSize="10sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/propertyPlaceText" />
+
+            <TextView
+                android:id="@+id/propertyAreaText"
+                android:layout_width="115dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="16dp"
+                android:text="TextView"
+                android:textAlignment="textEnd"
+                android:textColor="@color/design_default_color_secondary"
+                android:textSize="10sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/propertyPriceText" />
+
+            <TextView
+                android:id="@+id/propertyPlaceText"
+                android:layout_width="115dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                android:text="TextView"
+                android:textAlignment="textEnd"
+                android:textColor="@color/teal_700"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/propertyImageView" />
+
+            <ImageView
+                android:id="@+id/propertyImageView"
+                android:layout_width="match_parent"
+                android:layout_height="200sp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:scaleType="centerInside"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/property0" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

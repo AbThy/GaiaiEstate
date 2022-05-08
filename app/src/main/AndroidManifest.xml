@@ -9,11 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents.NoActionBar">
+        <activity
+            android:name=".UploadActivity"
+            android:exported="false" />
         <!-- -  -   -   -   -   -   -   -   -   -   -   -   -   - -->
         <activity
             android:name=".BrowserActivity"
             android:exported="false"
-            android:label="@string/title_activity_browser"/>
+            android:label="@string/title_activity_browser" />
         <activity
             android:name=".RegisterActivity"
             android:exported="false" />
