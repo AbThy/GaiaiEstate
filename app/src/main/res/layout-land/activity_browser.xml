@@ -18,7 +18,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/searchTextView"
@@ -26,6 +26,15 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.4"
             android:text="Search by maximum price:" />
+
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="250sp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-4dp"
+            android:indeterminate="false"
+            android:max="999"
+            android:progress="1" />
 
         <TextView
             android:id="@+id/maximumPriceTextView"
@@ -44,18 +53,6 @@
 
     </LinearLayout>
 
-    <SeekBar
-        android:id="@+id/seekBar"
-        android:layout_width="250sp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="-4dp"
-        android:indeterminate="false"
-        android:max="999"
-        android:progress="1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
     <ImageButton
         android:id="@+id/uploadButton"
         android:layout_width="60sp"
@@ -69,33 +66,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/icon_upload" />
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#000000"
-        android:theme="@style/Theme.GaiaEstate.NoActionBar"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp">
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:minHeight="?actionBarSize"
-            android:padding="@dimen/appbar_padding"
-            android:text="@string/app_name"
-            android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
-            android:textColor="#8BC34A" />
-
-    </com.google.android.material.appbar.AppBarLayout>
-
     <!--    ViewPager displaying property XML objects -->
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/pager"
-        android:layout_width="match_parent"
-        android:layout_height="450sp"
+        android:layout_width="400sp"
+        android:layout_height="270sp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/welcomeText" />
@@ -104,10 +82,12 @@
         android:id="@+id/welcomeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="-17dp"
         android:text="Properties recommended for you:"
+        android:textColor="#000000"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.14"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/seekBar" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 </androidx.constraintlayout.widget.ConstraintLayout>

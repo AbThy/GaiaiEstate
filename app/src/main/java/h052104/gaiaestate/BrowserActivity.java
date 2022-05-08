@@ -3,6 +3,7 @@ package h052104.gaiaestate;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -80,12 +81,12 @@ public class BrowserActivity extends AppCompatActivity {
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
+                findViewById(R.id.browserView).setBackgroundColor(Color.BLACK);
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
+                findViewById(R.id.browserView).setBackgroundColor(Color.argb(100, 38, 60, 39));
             }
         });
 
@@ -94,10 +95,7 @@ public class BrowserActivity extends AppCompatActivity {
 
         // Pager & data
         viewPager = findViewById(R.id.pager);
-        adapter = new PropertyViewPagerAdapter(this, properties);
-        viewPager.setAdapter(adapter);
-        viewPager.setPageTransformer(true, new Transformator());
-        viewPager.setPadding(30,0,30,0);
+        setupNewAdapter();
         queryData();
 
         // Animate upload button
@@ -106,7 +104,7 @@ public class BrowserActivity extends AppCompatActivity {
     }
 
     private void queryData() {
-        properties.clear();
+        setupNewAdapter();
         notifHandler.send("Downloading properties.");
         firestoreItems.orderBy("uploadDate").limit(10).get().addOnSuccessListener(queryDocumentSnapshots -> {
                 for(QueryDocumentSnapshot document : queryDocumentSnapshots){
@@ -132,12 +130,8 @@ public class BrowserActivity extends AppCompatActivity {
     }
 
     public void queryByPrice(View view) {
-        properties.clear();
-        notifHandler.send("Downloading properties under " + maxPrice + " million.");
-        adapter = new PropertyViewPagerAdapter(this, properties);
-        viewPager.setAdapter(adapter);
-        viewPager.setPageTransformer(true, new Transformator());
-        viewPager.setPadding(30,0,30,0);
+        setupNewAdapter();
+        notifHandler.send("Downloading properties under " + maxPrice + " million HUF.");
         firestoreItems.orderBy("priceInMillion").limit(10).whereLessThanOrEqualTo("priceInMillion",maxPrice).get().addOnSuccessListener(queryDocumentSnapshots -> {
             for(QueryDocumentSnapshot document : queryDocumentSnapshots){
                 Property p = document.toObject(Property.class);
@@ -161,10 +155,24 @@ public class BrowserActivity extends AppCompatActivity {
         });
     }
 
+    public void editPage() {
+        Intent i = new Intent(this, BrowserActivity.class);
+        i.putExtra("SECRET_KEY", 4254);
+        i.putExtra("id",1);
+        startActivity(i);
+    }
+
+    private void setupNewAdapter(){
+        properties.clear();
+        adapter = new PropertyViewPagerAdapter(this, properties);
+        viewPager.setAdapter(adapter);
+        viewPager.setPageTransformer(true, new Transformator());
+        viewPager.setPadding(30,0,30,0);
+    }
+
     public void openUpload(View view){
         Intent i = new Intent(this, UploadActivity.class);
         i.putExtra("SECRET_KEY", 4254);
         startActivity(i);
     }
-
 }

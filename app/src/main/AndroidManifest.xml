@@ -10,9 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents.NoActionBar">
         <activity
-            android:name=".UploadActivity"
+            android:name=".EditPropertyActivity"
             android:exported="false" />
-        <!-- -  -   -   -   -   -   -   -   -   -   -   -   -   - -->
+        <activity
+            android:name=".UploadActivity"
+            android:exported="false" /> <!-- -  -   -   -   -   -   -   -   -   -   -   -   -   - -->
         <activity
             android:name=".BrowserActivity"
             android:exported="false"

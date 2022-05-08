@@ -6,10 +6,10 @@
     android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="320sp"
+        android:layout_width="400sp"
+        android:layout_height="260sp"
         android:background="#064508"
-        app:cardBackgroundColor="#FF01453F"
+        app:cardBackgroundColor="#01453F"
         app:cardCornerRadius="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,7 +18,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="300dp">
+            android:layout_height="280dp">
 
             <TextView
                 android:id="@+id/propertyNameText"
@@ -36,6 +36,7 @@
                 android:id="@+id/propertyPriceText"
                 android:layout_width="115dp"
                 android:layout_height="20dp"
+                android:layout_marginTop="-5dp"
                 android:layout_marginEnd="54dp"
                 android:text="TextView"
                 android:textAlignment="textEnd"
@@ -48,7 +49,7 @@
                 android:id="@+id/propertyAreaText"
                 android:layout_width="115dp"
                 android:layout_height="20dp"
-                android:layout_marginTop="-4dp"
+                android:layout_marginTop="-8dp"
                 android:layout_marginEnd="54dp"
                 android:text="TextView"
                 android:textAlignment="textEnd"
@@ -74,7 +75,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200sp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="6dp"
                 android:layout_marginEnd="8dp"
                 android:scaleType="centerInside"
                 app:layout_constraintEnd_toEndOf="parent"

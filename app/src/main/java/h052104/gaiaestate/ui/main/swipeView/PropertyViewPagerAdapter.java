@@ -1,6 +1,7 @@
 package h052104.gaiaestate.ui.main.swipeView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import org.w3c.dom.Text;
 import java.io.File;
 import java.util.ArrayList;
 
+import h052104.gaiaestate.BrowserActivity;
 import h052104.gaiaestate.R;
 import h052104.gaiaestate.model.Property;
 
@@ -69,6 +71,7 @@ public class PropertyViewPagerAdapter extends PagerAdapter {
         // de aimango azt mondta így jó lesz és jó lett
         // ¯\_(ツ)_/¯
         // https://stackoverflow.com/questions/9402970/android-viewpager-throwing-indexoutofbounds-exception-when-setting-current-item
+
 
         return view;
     }
