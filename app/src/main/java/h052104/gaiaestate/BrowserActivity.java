@@ -49,6 +49,8 @@ public class BrowserActivity extends AppCompatActivity {
     private CollectionReference firestoreItems;
     private StorageReference storageReference;
 
+    private NotificationHandler notifHandler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +89,9 @@ public class BrowserActivity extends AppCompatActivity {
             }
         });
 
+        // Notifications
+        notifHandler = new NotificationHandler(this);
+
         // Pager & data
         viewPager = findViewById(R.id.pager);
         adapter = new PropertyViewPagerAdapter(this, properties);
@@ -98,11 +103,11 @@ public class BrowserActivity extends AppCompatActivity {
         // Animate upload button
         Animation animation = AnimationUtils.loadAnimation(findViewById(R.id.uploadButton).getContext(), R.anim.button_slide);
         findViewById(R.id.uploadButton).startAnimation(animation);
-
     }
 
     private void queryData() {
         properties.clear();
+        notifHandler.send("Downloading properties.");
         firestoreItems.orderBy("uploadDate").limit(10).get().addOnSuccessListener(queryDocumentSnapshots -> {
                 for(QueryDocumentSnapshot document : queryDocumentSnapshots){
                     Property p = document.toObject(Property.class);
@@ -128,6 +133,7 @@ public class BrowserActivity extends AppCompatActivity {
 
     public void queryByPrice(View view) {
         properties.clear();
+        notifHandler.send("Downloading properties under " + maxPrice + " million.");
         adapter = new PropertyViewPagerAdapter(this, properties);
         viewPager.setAdapter(adapter);
         viewPager.setPageTransformer(true, new Transformator());
