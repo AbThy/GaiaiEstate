@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -39,6 +41,10 @@ public class BrowserActivity extends AppCompatActivity {
     private PropertyViewPagerAdapter adapter;
     private ArrayList<Property> properties;
 
+    private int maxPrice = 999;
+    private TextView maxPriceText;
+    private SeekBar seekBar;
+
     private FirebaseFirestore firestore;
     private CollectionReference firestoreItems;
     private StorageReference storageReference;
@@ -60,40 +66,43 @@ public class BrowserActivity extends AppCompatActivity {
         firestore = FirebaseFirestore.getInstance();
         firestoreItems = firestore.collection("property");
 
-        // Slider & data
+        // Search
+        maxPriceText = findViewById(R.id.maximumPriceTextView);
+        seekBar = findViewById(R.id.seekBar);
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                maxPrice = i;
+                maxPriceText.setText(i + "M Ft");
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        // Pager & data
         viewPager = findViewById(R.id.pager);
+        adapter = new PropertyViewPagerAdapter(this, properties);
+        viewPager.setAdapter(adapter);
+        viewPager.setPageTransformer(true, new Transformator());
+        viewPager.setPadding(30,0,30,0);
         queryData();
 
         // Animate upload button
         Animation animation = AnimationUtils.loadAnimation(findViewById(R.id.uploadButton).getContext(), R.anim.button_slide);
         findViewById(R.id.uploadButton).startAnimation(animation);
-        /*
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });*/
     }
 
     private void queryData() {
-        adapter = new PropertyViewPagerAdapter(this, properties);
-        viewPager.setAdapter(adapter);
-        viewPager.setPageTransformer(true, new Transformator());
-        viewPager.setPadding(100,0,0,100);
-
         properties.clear();
-
         firestoreItems.orderBy("uploadDate").limit(10).get().addOnSuccessListener(queryDocumentSnapshots -> {
                 for(QueryDocumentSnapshot document : queryDocumentSnapshots){
                     Property p = document.toObject(Property.class);
@@ -117,9 +126,39 @@ public class BrowserActivity extends AppCompatActivity {
         });
     }
 
+    public void queryByPrice(View view) {
+        properties.clear();
+        adapter = new PropertyViewPagerAdapter(this, properties);
+        viewPager.setAdapter(adapter);
+        viewPager.setPageTransformer(true, new Transformator());
+        viewPager.setPadding(30,0,30,0);
+        firestoreItems.orderBy("priceInMillion").limit(10).whereLessThanOrEqualTo("priceInMillion",maxPrice).get().addOnSuccessListener(queryDocumentSnapshots -> {
+            for(QueryDocumentSnapshot document : queryDocumentSnapshots){
+                Property p = document.toObject(Property.class);
+                storageReference = FirebaseStorage.getInstance().getReference("propertyImages/" + p.getImageKey());
+                try {
+                    File local = File.createTempFile("tempFile", ".jpg");
+                    storageReference.getFile(local).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                            Bitmap bitmap = BitmapFactory.decodeFile(local.getAbsolutePath());
+                            p.setImage(bitmap);
+                            properties.add(p);
+                            adapter.notifyDataSetChanged();
+                        }
+                    });
+
+                } catch(Exception ex) {
+                    // TODO
+                }
+            }
+        });
+    }
+
     public void openUpload(View view){
         Intent i = new Intent(this, UploadActivity.class);
         i.putExtra("SECRET_KEY", 4254);
         startActivity(i);
     }
+
 }

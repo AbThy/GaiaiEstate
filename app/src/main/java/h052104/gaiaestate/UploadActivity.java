@@ -61,7 +61,7 @@ public class UploadActivity extends AppCompatActivity {
         // Authentication - Get user
         user = FirebaseAuth.getInstance().getCurrentUser();
         if(user.isAnonymous()){
-            Toast.makeText(UploadActivity.this, "You have to log in to upload!",Toast.LENGTH_LONG).show();
+            Toast.makeText(UploadActivity.this, "You must log in to upload!",Toast.LENGTH_LONG).show();
             finish();
         }
 
