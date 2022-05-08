@@ -8,6 +8,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -30,6 +32,10 @@ public class MainActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         preferences = getSharedPreferences(PREF_KEY, MODE_PRIVATE);
+
+        // Animate view
+        Animation animation = AnimationUtils.loadAnimation(findViewById(R.id.mainPageView).getContext(), R.anim.fade_in);
+        findViewById(R.id.mainPageView).startAnimation(animation);
     }
 
     public void login(View view) {

@@ -14,6 +14,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -62,6 +64,10 @@ public class UploadActivity extends AppCompatActivity {
             Toast.makeText(UploadActivity.this, "You have to log in to upload!",Toast.LENGTH_LONG).show();
             finish();
         }
+
+        // Animate view
+        Animation animation = AnimationUtils.loadAnimation(findViewById(R.id.uploadView).getContext(), R.anim.fade_in);
+        findViewById(R.id.uploadView).startAnimation(animation);
 
         // Firestore
         firestore = FirebaseFirestore.getInstance();

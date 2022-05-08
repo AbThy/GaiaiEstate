@@ -8,6 +8,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -35,6 +37,10 @@ public class RegisterActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         preferences = getSharedPreferences(PREF_KEY, MODE_PRIVATE);
+
+        // Animate view
+        Animation animation = AnimationUtils.loadAnimation(findViewById(R.id.registerView).getContext(), R.anim.fade_in);
+        findViewById(R.id.registerView).startAnimation(animation);
     }
 
     public void cancel(View view) {

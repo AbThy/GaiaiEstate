@@ -5,6 +5,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -62,6 +64,10 @@ public class BrowserActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.pager);
         queryData();
 
+        // Animate upload button
+        Animation animation = AnimationUtils.loadAnimation(findViewById(R.id.uploadButton).getContext(), R.anim.button_slide);
+        findViewById(R.id.uploadButton).startAnimation(animation);
+        /*
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -77,7 +83,7 @@ public class BrowserActivity extends AppCompatActivity {
             public void onPageScrollStateChanged(int state) {
 
             }
-        });
+        });*/
     }
 
     private void queryData() {
@@ -109,29 +115,6 @@ public class BrowserActivity extends AppCompatActivity {
                     }
                 }
         });
-    }
-
-    private void loadProperties() {
-
-        properties = new ArrayList<>();
-        for (int i = 0; i < 10; i++){
-            Property p = new Property();
-            p.setTitle(i + "-es ingatlan");
-            p.setLocation("Biatorbágy");
-            p.setPriceInMillion(new Random().nextFloat());
-            properties.add(p);
-        }
-
-        adapter = new PropertyViewPagerAdapter(this, properties);
-        viewPager.setAdapter(adapter);
-        viewPager.setPageTransformer(true, new Transformator());
-        viewPager.setPadding(100,0,0,100);
-    }
-
-    public void openProfile(View view){
-        Intent i = new Intent(this, ProfileActivity.class);
-        i.putExtra("SECRET_KEY", 4254);
-        startActivity(i);
     }
 
     public void openUpload(View view){
